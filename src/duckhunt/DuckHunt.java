@@ -7,7 +7,7 @@ import org.newdawn.slick.*;
 
 public class DuckHunt extends BasicGame
 {
-    public DuckHunt()
+    private DuckHunt()
     {
         super("DuckHunt");
     }
