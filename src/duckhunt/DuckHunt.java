@@ -34,6 +34,10 @@ public class DuckHunt extends BasicGame
     public static void main(String[] args) throws SlickException
     {
         System.out.println("It Works!");
+        String libPath = System.getProperty("user.home") + "/slick-lib/lwjgl-2.8.5/native/linux";
+        System.out.println("Using path: " + libPath);
+        System.setProperty("java.library.path", libPath);
+        
         AppGameContainer app = new AppGameContainer(new DuckHunt());
         
         app.setDisplayMode(640, 480, false);
