@@ -4,28 +4,18 @@
  */
 package duckhunt;
 import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
 
-public class DuckHunt extends BasicGame
+public class DuckHunt extends StateBasedGame
 {
     private DuckHunt()
     {
         super("DuckHunt");
     }
     
-    @Override public void init(GameContainer gc) throws SlickException
+    @Override public void initStatesList(GameContainer gc)
     {
-        System.out.println("Init");
-    }
-    
-    @Override public void update(GameContainer gc, int delta) throws SlickException
-    {
-        System.out.println("Update");
-    }
-    
-    @Override public void render(GameContainer gc, Graphics g) throws SlickException
-    {
-        System.out.println("Render");
-        g.drawString("Woot", 150, 150);
+        // no states yet
     }
 
     /**
