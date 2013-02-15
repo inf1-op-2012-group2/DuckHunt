@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package duckhunt;
-import java.lang.reflect.Field;
 import org.newdawn.slick.*;
 
 public class DuckHunt extends BasicGame
