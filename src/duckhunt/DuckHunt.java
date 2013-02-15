@@ -13,6 +13,13 @@ public class DuckHunt extends StateBasedGame
         super("DuckHunt");
     }
     
+    private static DuckHunt INSTANCE;
+    final public static DuckHunt getInstance()
+    {
+        if(INSTANCE == null) INSTANCE = new DuckHunt();
+        return INSTANCE;
+    }
+    
     @Override public void initStatesList(GameContainer gc)
     {
         // no states yet
@@ -26,7 +33,7 @@ public class DuckHunt extends StateBasedGame
         System.setProperty("org.lwjgl.librarypath", System.getProperty("user.home") + "/slick-lib/lwjgl-2.8.5/native/linux");
         System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
         
-        AppGameContainer app = new AppGameContainer(new DuckHunt());
+        AppGameContainer app = new AppGameContainer(DuckHunt.getInstance());
         
         app.setDisplayMode(640, 480, false);
         app.start();
