@@ -34,15 +34,8 @@ public class DuckHunt extends BasicGame
      */
     public static void main(String[] args) throws SlickException, NoSuchFieldException, IllegalAccessException
     {
-        System.out.println("Initialising...");
-        String libPath = System.getProperty("user.home") + "/slick-lib/lwjgl-2.8.5/native/linux";
-        System.setProperty("java.library.path", libPath);
-        System.out.println("Using path: " + System.getProperty("java.library.path"));
-        
-        //horrible, horrible hax to flush the cached version of java.library.path
-        Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-        fieldSysPath.setAccessible( true );
-        fieldSysPath.set( null, null );
+        System.setProperty("org.lwjgl.librarypath", System.getProperty("user.home") + "/slick-lib/lwjgl-2.8.5/native/linux");
+        System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
         
         AppGameContainer app = new AppGameContainer(new DuckHunt());
         
