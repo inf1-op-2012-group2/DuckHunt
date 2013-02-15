@@ -8,6 +8,9 @@ import org.newdawn.slick.*;
 
 public class DuckHunt extends BasicGame
 {
+    
+    Image land = null;
+    
     private DuckHunt()
     {
         super("DuckHunt");
@@ -15,7 +18,8 @@ public class DuckHunt extends BasicGame
     
     @Override public void init(GameContainer gc) throws SlickException
     {
-        System.out.println("Init");
+        System.out.println("Init");   
+        land = new Image("bkgd.jpg");
     }
     
     @Override public void update(GameContainer gc, int delta) throws SlickException
@@ -26,6 +30,7 @@ public class DuckHunt extends BasicGame
     @Override public void render(GameContainer gc, Graphics g) throws SlickException
     {
         System.out.println("Render");
+        land.draw(0, 0);
         g.drawString("Woot", 150, 150);
     }
 
