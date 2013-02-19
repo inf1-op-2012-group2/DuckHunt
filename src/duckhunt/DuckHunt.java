@@ -10,6 +10,10 @@ public class DuckHunt extends BasicGame
 {
     
     Image land = null;
+    Image cat = null;
+    float x = 400;
+    float y = 300;
+    float scale = 1;
     
     private DuckHunt()
     {
@@ -20,11 +24,47 @@ public class DuckHunt extends BasicGame
     {
         System.out.println("Init");   
         land = new Image("bkgd.jpg");
+        cat = new Image ("original.gif");
     }
     
     @Override public void update(GameContainer gc, int delta) throws SlickException
     {
         System.out.println("Update");
+       Input input = gc.getInput();
+ 
+        if(input.isKeyDown(Input.KEY_LEFT))
+        {
+            cat.rotate(-0.2f * delta);
+        }
+ 
+        if(input.isKeyDown(Input.KEY_RIGHT))
+        {
+            cat.rotate(0.2f * delta);
+        }
+ 
+        if(input.isKeyDown(Input.KEY_UP)) 
+        {
+            float hyp = 0.4f * delta;
+ 
+            float rotation = cat.getRotation();
+ 
+            x+= hyp * Math.sin(Math.toRadians(rotation));
+            y-= hyp * Math.cos(Math.toRadians(rotation));
+    
+        }
+        
+        if(input.isKeyDown(Input.KEY_DOWN))
+        {
+            float hyp = -0.4f * delta;
+ 
+            float rotation = cat.getRotation();
+ 
+            x+= hyp * Math.sin(Math.toRadians(rotation));
+            y-= hyp * Math.cos(Math.toRadians(rotation));
+    
+        }
+        
+        
     }
     
     @Override public void render(GameContainer gc, Graphics g) throws SlickException
@@ -32,6 +72,7 @@ public class DuckHunt extends BasicGame
         System.out.println("Render");
         land.draw(0, 0);
         g.drawString("Woot", 150, 150);
+        cat.draw(x, y, scale);
     }
 
     /**
