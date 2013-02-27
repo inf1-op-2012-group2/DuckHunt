@@ -23,8 +23,8 @@ public class DuckHunt extends BasicGame
     @Override public void init(GameContainer gc) throws SlickException
     {
         System.out.println("Init");   
-        land = new Image("bkgd.jpg");
-        cat = new Image ("original.gif");
+        land = new Image("images/bkgd.jpg");
+        cat = new Image ("images/original.gif");
     }
     
     @Override public void update(GameContainer gc, int delta) throws SlickException
