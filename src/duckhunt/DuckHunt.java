@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package duckhunt;
+import org.lwjgl.input.Mouse;
 import java.lang.reflect.Field;
 import org.newdawn.slick.*;
 
@@ -11,9 +12,12 @@ public class DuckHunt extends BasicGame
     
     Image land = null;
     Image cat = null;
+    Image cursor = null;
     float x = 400;
     float y = 300;
     float scale = 1;
+    
+    public String mouse = "No input yet!";
     
     private DuckHunt()
     {
@@ -25,12 +29,19 @@ public class DuckHunt extends BasicGame
         System.out.println("Init");   
         land = new Image("images/bkgd.jpg");
         cat = new Image ("images/original.gif");
+        cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
+        gc.setMouseCursor("images/cursor.png",0,0); 
     }
     
     @Override public void update(GameContainer gc, int delta) throws SlickException
     {
         System.out.println("Update");
-       Input input = gc.getInput();
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
+        
+        mouse = "Mouse Co-Ords, x: " + posX + " y: " + posY;
+        
+        Input input = gc.getInput();
  
         if(input.isKeyDown(Input.KEY_LEFT))
         {
@@ -71,8 +82,8 @@ public class DuckHunt extends BasicGame
     {
         System.out.println("Render");
         land.draw(0, 0);
-        g.drawString("Woot", 150, 150);
-        cat.draw(x, y, scale);
+        g.drawString(mouse, 50, 50);
+        cat.draw(x, y, scale); 
     }
 
     /**
