@@ -86,7 +86,7 @@ public class DuckHunt extends BasicGame
         
         AppGameContainer app = new AppGameContainer(new DuckHunt());
         
-        app.setDisplayMode(640, 480, false);
+        app.setDisplayMode(1024, 720, false);
         app.start();
     }
 }
