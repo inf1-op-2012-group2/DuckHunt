@@ -33,7 +33,7 @@ public class DuckHunt extends BasicGame
         land = new Image("images/bkgd.jpg");
         cat = new Image ("images/original.gif");
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
-        gc.setMouseCursor("images/cursor.png",0,0); 
+        gc.setMouseCursor(cursor,0,0); 
     }
     
     @Override public void update(GameContainer gc, int delta) throws SlickException
