@@ -10,6 +10,8 @@ import org.newdawn.slick.*;
 public class DuckHunt extends BasicGame
 {
     
+    private boolean mousePressed = false;
+    
     Image land = null;
     Image cat = null;
     Image cursor = null;
@@ -42,41 +44,14 @@ public class DuckHunt extends BasicGame
         mouse = "Mouse Co-Ords, x: " + posX + " y: " + posY;
         
         Input input = gc.getInput();
- 
-        if(input.isKeyDown(Input.KEY_LEFT))
-        {
-            cat.rotate(-0.2f * delta);
-        }
- 
-        if(input.isKeyDown(Input.KEY_RIGHT))
-        {
-            cat.rotate(0.2f * delta);
-        }
- 
-        if(input.isKeyDown(Input.KEY_UP)) 
-        {
-            float hyp = 0.4f * delta;
- 
-            float rotation = cat.getRotation();
- 
-            x+= hyp * Math.sin(Math.toRadians(rotation));
-            y-= hyp * Math.cos(Math.toRadians(rotation));
-    
-        }
-        
-        if(input.isKeyDown(Input.KEY_DOWN))
-        {
-            float hyp = -0.4f * delta;
- 
-            float rotation = cat.getRotation();
- 
-            x+= hyp * Math.sin(Math.toRadians(rotation));
-            y-= hyp * Math.cos(Math.toRadians(rotation));
-    
+        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            mousePressed = true;         
+        }else{
+            mousePressed = false;
         }
         
         
-    }
+     }
     
     @Override public void render(GameContainer gc, Graphics g) throws SlickException
     {
@@ -84,6 +59,9 @@ public class DuckHunt extends BasicGame
         land.draw(0, 0);
         g.drawString(mouse, 50, 50);
         cat.draw(x, y, scale); 
+        if (mousePressed == true) {
+            g.drawString("Mouse pressed!", 100, 100);
+        }
     }
 
     /**
