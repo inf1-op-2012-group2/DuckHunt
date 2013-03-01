@@ -5,6 +5,7 @@
 package duckhunt;
 import org.lwjgl.input.Mouse;
 import java.lang.reflect.Field;
+import org.lwjgl.opengl.OpenGLException;
 import org.newdawn.slick.*;
 
 public class DuckHunt extends BasicGame
@@ -55,12 +56,16 @@ public class DuckHunt extends BasicGame
     
     @Override public void render(GameContainer gc, Graphics g) throws SlickException
     {
+        try {
         System.out.println("Render");
         land.draw(0, 0);
         g.drawString(mouse, 50, 50);
         cat.draw(x, y, scale); 
         if (mousePressed == true) {
             g.drawString("Mouse pressed!", 100, 100);
+        }
+        } catch (OpenGLException ex) {
+            // just ignore it - prevents random crashes 
         }
     }
 
