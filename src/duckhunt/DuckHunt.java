@@ -8,21 +8,26 @@ import org.newdawn.slick.state.*;
 
 public class DuckHunt extends StateBasedGame
 {
+    public static final int STATE_MENU = 0;
+    public static final int STATE_GAME = 1;
+    public static final int STATE_SCORE = 2;
+    
     private DuckHunt()
     {
         super("DuckHunt");
     }
     
-    private static DuckHunt INSTANCE;
+    private static DuckHunt INSTANCE = new DuckHunt();
     final public static DuckHunt getInstance()
     {
-        if(INSTANCE == null) INSTANCE = new DuckHunt();
         return INSTANCE;
     }
     
     @Override public void initStatesList(GameContainer gc)
     {
-        // no states yet
+        this.addState(new MenuState(STATE_MENU));
+        this.addState(new GameState(STATE_GAME));
+        this.addState(new ScoreState(STATE_SCORE));
     }
 
     /**
