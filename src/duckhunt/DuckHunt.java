@@ -29,7 +29,6 @@ public class DuckHunt extends BasicGame
     
     @Override public void init(GameContainer gc) throws SlickException
     {
-        System.out.println("Init");   
         land = new Image("images/bkgd.jpg");
         cat = new Image ("images/original.gif");
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
@@ -38,7 +37,6 @@ public class DuckHunt extends BasicGame
     
     @Override public void update(GameContainer gc, int delta) throws SlickException
     {
-        System.out.println("Update");
         int posX = Mouse.getX();
         int posY = Mouse.getY();
         
@@ -49,15 +47,12 @@ public class DuckHunt extends BasicGame
             mousePressed = true;         
         }else{
             mousePressed = false;
-        }
-        
-        
+        }        
      }
     
     @Override public void render(GameContainer gc, Graphics g) throws SlickException
     {
         try {
-        System.out.println("Render");
         land.draw(0, 0);
         g.drawString(mouse, 50, 50);
         cat.draw(x, y, scale); 
