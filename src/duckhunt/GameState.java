@@ -62,6 +62,7 @@ public class GameState extends BasicGameState {
             }
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
+            System.err.println("OpenGLException: " + ex.getMessage());
         }
     }
 
