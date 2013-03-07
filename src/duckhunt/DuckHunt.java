@@ -3,65 +3,33 @@
  * and open the template in the editor.
  */
 package duckhunt;
-import org.lwjgl.input.Mouse;
-import java.lang.reflect.Field;
-import org.lwjgl.opengl.OpenGLException;
-import org.newdawn.slick.*;
 
-public class DuckHunt extends BasicGame
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+
+public class DuckHunt extends StateBasedGame
 {
-    
-    private boolean mousePressed = false;
-    
-    Image land = null;
-    Image cat = null;
-    Image cursor = null;
-    float x = 400;
-    float y = 300;
-    float scale = 1;
-    
-    public String mouse = "No input yet!";
+
+    public static final int STATE_MENU = 0;
+    public static final int STATE_GAME = 1;
+    public static final int STATE_SCORE = 2;
     
     private DuckHunt()
     {
         super("DuckHunt");
     }
     
-    @Override public void init(GameContainer gc) throws SlickException
+    private static DuckHunt INSTANCE = new DuckHunt();
+    final public static DuckHunt getInstance()
     {
-        land = new Image("images/bkgd.jpg");
-        cat = new Image ("images/original.gif");
-        cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
-        gc.setMouseCursor(cursor,0,0); 
+        return INSTANCE;
     }
     
-    @Override public void update(GameContainer gc, int delta) throws SlickException
+    @Override public void initStatesList(GameContainer gc)
     {
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
-        
-        mouse = "Mouse Co-Ords, x: " + posX + " y: " + posY;
-        
-        Input input = gc.getInput();
-        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            mousePressed = true;         
-        }else{
-            mousePressed = false;
-        }        
-     }
-    
-    @Override public void render(GameContainer gc, Graphics g) throws SlickException
-    {
-        try {
-        land.draw(0, 0);
-        g.drawString(mouse, 50, 50);
-        cat.draw(x, y, scale); 
-        if (mousePressed == true) {
-            g.drawString("Mouse pressed!", 100, 100);
-        }
-        } catch (OpenGLException ex) {
-            // just ignore it - prevents random crashes 
-        }
+        this.addState(new MenuState(STATE_MENU));
+        this.addState(new GameState(STATE_GAME));
+        this.addState(new ScoreState(STATE_SCORE));
     }
 
     /**
@@ -69,17 +37,10 @@ public class DuckHunt extends BasicGame
      */
     public static void main(String[] args) throws SlickException, NoSuchFieldException, IllegalAccessException
     {
-        System.out.println("Initialising...");
-        String libPath = System.getProperty("user.home") + "/slick-lib/lwjgl-2.8.5/native/linux";
-        System.setProperty("java.library.path", libPath);
-        System.out.println("Using path: " + System.getProperty("java.library.path"));
+        System.setProperty("org.lwjgl.librarypath", System.getProperty("user.home") + "/slick-lib/lwjgl-2.8.5/native/linux");
+        System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
         
-        //horrible, horrible hax to flush the cached version of java.library.path
-        Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-        fieldSysPath.setAccessible( true );
-        fieldSysPath.set( null, null );
-        
-        AppGameContainer app = new AppGameContainer(new DuckHunt());
+        AppGameContainer app = new AppGameContainer(DuckHunt.getInstance());
         
         app.setDisplayMode(1024, 720, false);
         app.start();
