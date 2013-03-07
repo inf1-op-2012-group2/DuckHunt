@@ -48,7 +48,7 @@ public class GameState extends BasicGameState {
         land = new Image("images/bkgd.jpg");
         cat = new Image ("images/original.gif");
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
-        gc.setMouseCursor(cursor,0,0); 
+        gc.setMouseCursor(cursor, 16, 16); 
     }
 
     @Override public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
