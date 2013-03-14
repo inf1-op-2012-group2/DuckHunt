@@ -26,6 +26,17 @@ abstract public class Entity {
             entityImage.draw(pos.x, pos.y);
     }
     
+    public boolean contains(Vector2f what)
+    {
+        if(
+            (what.x < pos.x) ||
+            (what.y < pos.y) ||
+            (what.x > pos.x + size.x) ||
+            (what.y > pos.y + size.y)
+        ) { return false; }
+        else { return true; }
+    }
+    
     public Entity(Image img, Vector2f pos, Vector2f size)
     {
         this.entityImage = img;

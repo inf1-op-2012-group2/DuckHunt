@@ -12,6 +12,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -24,10 +25,8 @@ public class GameState extends BasicGameState {
     private boolean mousePressed = false;
     
     Image land = null;
-    Image cat = null;
+    NyanCat cat = null;
     Image cursor = null;
-    float x = 400;
-    float y = 300;
     float scale = 1;
     
     public String mouse = "No input yet!";
@@ -49,7 +48,7 @@ public class GameState extends BasicGameState {
         Music openingMenuMusic = new Music("music/patty.ogg");
 
         land = new Image("images/bkgd.jpg");
-        cat = new Image ("images/original.gif");
+        cat = new NyanCat(new Vector2f(400, 300));
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
         gc.setMouseCursor(cursor, 16, 16); 
         
@@ -61,7 +60,7 @@ public class GameState extends BasicGameState {
         try {
             land.draw(0, 0);
             g.drawString(mouse, 50, 50);
-            cat.draw(x, y, scale); 
+            cat.render(g);
             if (mousePressed == true) {
                 g.drawString("Mouse pressed!", 100, 100);
             }
