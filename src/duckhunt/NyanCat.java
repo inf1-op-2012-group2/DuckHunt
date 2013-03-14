@@ -39,7 +39,7 @@ public final class NyanCat extends Entity
     @Override
     public void think(int delta)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
     
 }
