@@ -23,7 +23,7 @@ public final class NyanCat extends Entity
     {
         try
         {
-            NYAN_IMAGE = new Image("original.gif");
+            NYAN_IMAGE = new Image("images/original.gif");
         }
         catch (SlickException ex)
         {
