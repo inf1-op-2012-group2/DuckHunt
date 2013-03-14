@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -45,10 +46,14 @@ public class GameState extends BasicGameState {
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
+        Music openingMenuMusic = new Music("music/patty.ogg");
+
         land = new Image("images/bkgd.jpg");
         cat = new Image ("images/original.gif");
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
         gc.setMouseCursor(cursor, 16, 16); 
+        
+        openingMenuMusic.loop();
     }
 
     @Override public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
