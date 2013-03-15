@@ -45,14 +45,14 @@ public class GameState extends BasicGameState {
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
-        Music openingMenuMusic = new Music("music/patty.ogg");
+        Music gameMusic = new Music("music/patty.wav");
 
         land = new Image("images/bkgd.jpg");
         cat = new NyanCat(new Vector2f(400, 300));
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
         gc.setMouseCursor(cursor, 16, 16); 
         
-        openingMenuMusic.loop();
+        gameMusic.loop();
     }
 
     @Override public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
