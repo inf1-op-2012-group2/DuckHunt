@@ -24,6 +24,7 @@ public class GameState extends BasicGameState {
     
     private boolean mousePressed = false;
     private boolean catHit = false;
+    private int score = 0;
     
     Image land = null;
     NyanCat cat = null;
@@ -62,7 +63,10 @@ public class GameState extends BasicGameState {
             
             if (mousePressed && catHit) {
                 g.drawString("Cat hit!", 200, 200);
+                score = score + 100;
             }
+            
+            g.drawString(Integer.toString(score), 50, 50);
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
             System.err.println("OpenGLException: " + ex.getMessage());
