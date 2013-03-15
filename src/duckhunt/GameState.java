@@ -29,9 +29,7 @@ public class GameState extends BasicGameState {
     NyanCat cat = null;
     Image cursor = null;
     float scale = 1;
-    
-    public String mouse = "No input yet!";
-    
+        
     private int stateId = -1;
     
     public GameState(int id)
@@ -60,11 +58,7 @@ public class GameState extends BasicGameState {
     {
         try {
             land.draw(0, 0);
-            g.drawString(mouse, 50, 50);
             cat.render(g);
-            if (mousePressed == true) {
-                g.drawString("Mouse pressed!", 100, 100);
-            }
             
             if (mousePressed && catHit) {
                 g.drawString("Cat hit!", 200, 200);
@@ -80,7 +74,6 @@ public class GameState extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
         
-        mouse = "Mouse Co-Ords, x: " + posX + " y: " + posY;
         
         catHit = cat.contains(new Vector2f(posX, posY));
         
