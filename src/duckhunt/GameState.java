@@ -23,6 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameState extends BasicGameState {
     
     private boolean mousePressed = false;
+    private boolean catHit = false;
     
     Image land = null;
     NyanCat cat = null;
@@ -45,14 +46,12 @@ public class GameState extends BasicGameState {
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
-        Music openingMenuMusic = new Music("music/patty.ogg");
 
-        land = new Image("images/bkgd.jpg");
+        land = new Image("images/duck5.png");
         cat = new NyanCat(new Vector2f(400, 300));
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
         gc.setMouseCursor(cursor, 16, 16); 
         
-        openingMenuMusic.loop();
     }
 
     @Override public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
@@ -63,6 +62,10 @@ public class GameState extends BasicGameState {
             cat.render(g);
             if (mousePressed == true) {
                 g.drawString("Mouse pressed!", 100, 100);
+            }
+            
+            if (mousePressed && catHit) {
+                g.drawString("Cat hit!", 200, 200);
             }
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
@@ -76,6 +79,9 @@ public class GameState extends BasicGameState {
         int posY = Mouse.getY();
         
         mouse = "Mouse Co-Ords, x: " + posX + " y: " + posY;
+        
+        catHit = cat.contains(new Vector2f(posX, posY));
+        
         
         Input input = gc.getInput();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
