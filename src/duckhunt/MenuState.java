@@ -6,6 +6,7 @@ package duckhunt;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -29,8 +30,10 @@ public class MenuState extends BasicGameState {
     }
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
-    {
+    { 
+        //Music menuMusic = new Music("music/menu.wav");
         //init that thing
+        //gameMusic.loop();
         sbg.enterState(DuckHunt.STATE_GAME);
     }
 
