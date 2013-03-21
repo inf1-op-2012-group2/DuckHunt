@@ -24,6 +24,8 @@ public class GameState extends BasicGameState {
     
     private boolean mousePressed = false;
     private boolean catHit = false;
+    private boolean pointScored = false;
+    private boolean drawCat = true;
     
     Image land = null;
     NyanCat cat = null;
@@ -31,6 +33,7 @@ public class GameState extends BasicGameState {
     float scale = 1;
         
     private int stateId = -1;
+    private int score = 0;
     
     public GameState(int id)
     {
@@ -45,7 +48,9 @@ public class GameState extends BasicGameState {
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
         Music gameMusic = new Music("music/patty.wav");
-
+        
+        pointScored = false;
+        
         land = new Image("images/duck5.png");
         cat = new NyanCat(new Vector2f(400, 300));
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
@@ -56,13 +61,26 @@ public class GameState extends BasicGameState {
 
     @Override public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
     {
+           
         try {
             land.draw(0, 0);
+            
+        if (drawCat) {
             cat.render(g);
+        }
             
             if (mousePressed && catHit) {
                 g.drawString("Cat hit!", 200, 200);
+                if (pointScored == false) {
+                    score += 20;
+                    drawCat = false;
+                    pointScored = true;
+                    
+                }
             }
+            
+            g.drawString("Score: " + Integer.toString(score), 200, 400);
+
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
             System.err.println("OpenGLException: " + ex.getMessage());
