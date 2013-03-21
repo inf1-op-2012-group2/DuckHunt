@@ -31,6 +31,7 @@ public class GameState extends BasicGameState {
     NyanCat cat = null;
     Image cursor = null;
     float scale = 1;
+    Music gameMusic = null;
         
     private int stateId = -1;
     private int score = 0;
@@ -47,7 +48,7 @@ public class GameState extends BasicGameState {
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
-        Music gameMusic = new Music("music/patty.wav");
+        gameMusic = new Music("music/patty.wav");
         
         pointScored = false;
         
@@ -102,6 +103,17 @@ public class GameState extends BasicGameState {
         }else{
             mousePressed = false;
         } 
+        
+        if ( input.isKeyPressed(Input.KEY_M) & gameMusic.paused() == false )
+        {
+             gameMusic.pause();
+             System.out.println("Music is paused");
+        }
+        if ( input.isKeyPressed(Input.KEY_N) & gameMusic.paused() == true )
+        {
+             System.out.println("Trying to unpause");
+             gameMusic.loop();
+        }
     }
    
 }
