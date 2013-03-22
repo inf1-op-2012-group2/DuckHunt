@@ -4,8 +4,11 @@
  */
 package duckhunt;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -16,9 +19,23 @@ abstract public class Entity {
     
     public Image entityImage = null;
     
-    public Vector2f pos, size;
+    private Vector2f pos;
+    private Vector2f size;
 
     public abstract void think(int delta);
+    
+    public void setPos(Vector2f v){
+        this.pos = v;
+    }
+    
+    public void setPos(int x, int y){
+        this.pos.x = x;
+        this.pos.y = y;
+    }
+    
+    public Vector2f getPos(){
+        return this.pos;
+    }
     
     public void render(Graphics g)
     {
@@ -28,18 +45,28 @@ abstract public class Entity {
     
     public boolean contains(Vector2f what)
     {
-        if(
-            (what.x < pos.x) ||
-            (what.y < pos.y) ||
-            (what.x > pos.x + size.x) ||
-            (what.y > pos.y + size.y)
-        ) { return false; }
-        else { return true; }
+        System.out.println(what.toString());
+        System.out.println(pos.toString());
+        if ((what.x > pos.x)
+                && (what.y > pos.y)
+                && (what.x < pos.x + size.x)
+                && (what.y < pos.y + size.y)) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
-    public Entity(Image img, Vector2f pos, Vector2f size)
+    public Entity(String imgPath, Vector2f pos, Vector2f size)
     {
-        this.entityImage = img;
+        try
+        {
+            this.entityImage = new Image(imgPath);
+        }
+        catch (SlickException ex)
+        {
+            Logger.getLogger(NyanCat.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.pos = pos;
         this.size = size;
     }    

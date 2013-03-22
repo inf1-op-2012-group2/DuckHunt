@@ -18,22 +18,15 @@ public final class NyanCat extends Entity
 {
     private static Image NYAN_IMAGE = null;
     private static Vector2f NYAN_SIZE = new Vector2f(200, 120);
+    private int upper;
+    private int right;
+
     
-    static
+    public NyanCat(int upper, int right)
     {
-        try
-        {
-            NYAN_IMAGE = new Image("images/original.gif");
-        }
-        catch (SlickException ex)
-        {
-            Logger.getLogger(NyanCat.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public NyanCat(Vector2f pos)
-    {
-        super(NYAN_IMAGE, pos, NYAN_SIZE);
+        super("images/original.gif", randomVector(upper,right), NYAN_SIZE);
+        this.upper = upper;
+        this.right = right;
     }
 
     @Override
@@ -42,4 +35,15 @@ public final class NyanCat extends Entity
         
     }
     
+    public void reset() {
+        super.setPos(randomVector(this.upper,this.right));
+    }
+    
+    public static Vector2f randomVector(int upper, int right){
+        int coordx = (int) (Math.random() * right);
+        int coordy = (int) (Math.random() * upper);
+        return new Vector2f(coordx,coordy);
+    }
+        
 }
+    
