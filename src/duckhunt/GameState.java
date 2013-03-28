@@ -67,10 +67,13 @@ public class GameState extends BasicGameState {
 
             if (mousePressed && catHit) {
                 g.drawString("Cat hit!", 200, 200);
+                System.out.println(pointScored);
                 if (pointScored == false) {
                     score += 20;
+                    
                     cat.reset();
-                    pointScored = true;
+                    
+                    System.out.println("Test2");         
 
                 }
             }
