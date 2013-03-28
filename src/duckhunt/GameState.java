@@ -70,8 +70,6 @@ public class GameState extends BasicGameState {
                 if (pointScored == false) {
                     score += 20;
                     cat.reset();
-                    pointScored = true;
-
                 }
             }
 
