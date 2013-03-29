@@ -59,7 +59,6 @@ public class GameState extends BasicGameState {
         scoreImg = new Image("images/score.png");
         cat = new NyanCat(gc.getHeight(), gc.getWidth());
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 2^n by 2^n dimensions Required */
-        
         //Set the mouse cursor to the cursor image variable
         gc.setMouseCursor(cursor, 16, 16);
 
@@ -97,7 +96,8 @@ public class GameState extends BasicGameState {
         int posX = Mouse.getX();
         int posY = gc.getHeight() - Mouse.getY();
 
-
+        cat.think(2);
+                
         Input input = gc.getInput();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             mousePressed = true;
