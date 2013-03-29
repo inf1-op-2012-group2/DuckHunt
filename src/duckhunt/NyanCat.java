@@ -24,7 +24,7 @@ public final class NyanCat extends Entity
     
     public NyanCat(int upper, int right)
     {
-        super("images/original.gif", randomVector(upper,right), NYAN_SIZE);
+        super("images/original.gif", upper,right, NYAN_SIZE);
         this.upper = upper;
         this.right = right;
     }
@@ -35,15 +35,6 @@ public final class NyanCat extends Entity
         
     }
     
-    public void reset() {
-        super.setPos(randomVector(this.upper,this.right));
-    }
-    
-    public static Vector2f randomVector(int upper, int right){
-        int coordx = (int) (Math.random() * right);
-        int coordy = (int) (Math.random() * upper);
-        return new Vector2f(coordx,coordy);
-    }
         
 }
     
