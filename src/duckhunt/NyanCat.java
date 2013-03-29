@@ -34,7 +34,6 @@ public final class NyanCat extends Entity
     {
         
     }
-    
         
 }
     
