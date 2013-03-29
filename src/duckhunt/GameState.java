@@ -6,8 +6,10 @@ package duckhunt;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.OpenGLException;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
@@ -26,6 +28,7 @@ public class GameState extends BasicGameState {
     private boolean catHit = false;
     private boolean pointScored = false;
     private Image land;
+    private Image scoreImg;
     NyanCat cat = null;
     Image cursor = null;
     float scale = 1;
@@ -45,15 +48,22 @@ public class GameState extends BasicGameState {
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
+        //Initialise Music
         gameMusic = new Music("music/patty.wav");
         
         pointScored = false;
 
-        land = new Image("images/duck5.png");
+        //Initialise Resources
+        
+        land = new Image("images/bkgd.png");
+        scoreImg = new Image("images/score.png");
         cat = new NyanCat(gc.getHeight(), gc.getWidth());
-        cursor = new Image("images/cursor.png"); /*Uncompressed PNG 32x32 Required */
+        cursor = new Image("images/cursor.png"); /*Uncompressed PNG 2^n by 2^n dimensions Required */
+        
+        //Set the mouse cursor to the cursor image variable
         gc.setMouseCursor(cursor, 16, 16);
 
+        //Start music on a loop
         gameMusic.loop();
     }
 
@@ -61,7 +71,8 @@ public class GameState extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         try {
-            land.draw(0, 0);
+            g.drawImage(land, 0, 0);
+            g.drawImage(scoreImg, 50, 600);
 
             cat.render(g);
 
@@ -72,13 +83,10 @@ public class GameState extends BasicGameState {
                     score += 20;
                     
                     cat.reset();
-                    
-                    System.out.println("Test2");         
-
                 }
             }
-
-            g.drawString("Score: " + Integer.toString(score), 200, 400);
+               
+            g.drawString("Score: " + Integer.toString(score), 100, 600);
 
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
