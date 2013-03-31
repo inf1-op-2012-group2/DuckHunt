@@ -26,6 +26,7 @@ public final class NyanCat extends Entity {
     private float y = 500;
     private float rndShift;
     private boolean catGradient = true;
+    private boolean xPositive = true;
 
     public NyanCat(int upper, int right) {
         super("images/original.gif", upper, right, NYAN_SIZE);
@@ -35,68 +36,117 @@ public final class NyanCat extends Entity {
 
     @Override
     public void think(int delta) 
-    {   
+    {       
         if (catGradient) 
         {
             if (y < 0) {
                 y = 0;
                 catGradient = false;
-                System.out.println("1");
             }
             else if ((y -= 0.1f * delta) > 0) {
                 y -= 0.1f * delta;
-                System.out.println("2");
             }
             else if ((y -= 0.1f * delta) == 0) {
                 y += 0.1f * delta;
                 catGradient = false;
-                System.out.println("3");
             }
-            
-            if ((x += 0.1f * delta) > 1024) 
-            {
-                x = 0 + (0.1f * delta);
+            if (xPositive) {
+                if (x > 0 && x < 824) {
+                    x += 0.1f * delta;
+                }
+                else if (x < 0) {
+                    x = 0;
+                }
+                else if (x > 824) {
+                    x = 1024;
+                    xPositive = false;
+                }
+                else if (x == 0) {
+                    x += 1 + 0.1f * delta; 
+                }
+                else if (x == 824) {
+                    xPositive = false;
+                    x -= 1 + 0.1 * delta;
+                }
             }
-            if ((x += 0.1f * delta) < 1024) {
-                x += 0.1f * delta;
+            if (!xPositive) {
+                if (x > 0) {
+                    x -= 0.1f * delta;
+                }
+                if (x < 0) {
+                    x = 0;
+                    xPositive = true;
+                }
+                if (x > 824) {
+                    x = 824;
+                }
+                if (x == 0) {
+                    x += 1 + 0.1f * delta; 
+                    xPositive = true;
+                }
             }
         }
         if (!catGradient) {
             if (y  > 0) {
                 y += 1 + 0.1f * delta;
-                System.out.println("4");
             }
-            if ((y -= 0.1f * delta) == 720) {      
+            if ((y -= 0.1f * delta) == 620) {      
                 y -= 0.1f * delta;
                 catGradient = true;
-                System.out.println("5");
             }
             if (y < 0) {      
                 y = 1;
-                System.out.println("7");
             }
-            if (y > 720) {      
-                y = 720;
+            if (y > 600) {      
+                y = 600;
                 catGradient = true;
-                System.out.println("6");
             }
-            if ((x += 0.1f * delta) > 1024) 
-            {
-                x = 0 + (0.1f * delta);
+            if (xPositive) {
+                if (x > 0 && x < 824) {
+                    x += 0.1f * delta;
+                }
+                else if (x < 0) {
+                    x = 0;
+                }
+                else if (x > 824) {
+                    x = 1024;
+                    xPositive = false;
+                }
+                else if (x == 0) {
+                    x += 1 + 0.1f * delta; 
+                }
+                else if (x == 824) {
+                    xPositive = false;
+                    x -= 1 + 0.1 * delta;
+                }
             }
-            if ((x += 0.1f * delta) < 1024) {
-                x += 0.1f * delta;
+            if (!xPositive) {
+                if (x > 0) {
+                    x -= 0.1f * delta;
+                }
+                if (x < 0) {
+                    x = 0;
+                    xPositive = true;
+                }
+                if (x > 824) {
+                    x = 824;
+                }
+                if (x == 0) {
+                    x += 1 + 0.1f * delta; 
+                    xPositive = true;
+                }
             }
         }
-        System.out.println(catGradient);
+        System.out.println(xPositive);
         super.setPos((int)x, (int) y);
     }
 
     @Override
     public void reset() {
-        x = 0;
-        y = 500;
         rndShift = (float)Math.random();
+        System.out.println(rndShift);
+        x = 0 + rndShift;      
+        y = 0 + rndShift;
         super.reset();
     }
 
