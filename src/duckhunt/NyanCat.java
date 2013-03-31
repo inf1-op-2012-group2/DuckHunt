@@ -15,60 +15,89 @@ import org.newdawn.slick.geom.Vector2f;
  *
  * @author rikki
  */
-public final class NyanCat extends Entity
-{
+public final class NyanCat extends Entity {
+
     private static Image NYAN_IMAGE = null;
     private static Vector2f NYAN_SIZE = new Vector2f(200, 120);
     private int upper;
     private int right;
     private float yd;
     private float x;
-    private float y;
+    private float y = 500;
+    private float rndShift;
+    private boolean catGradient = true;
 
-    
-    public NyanCat(int upper, int right)
-    {
-        super("images/original.gif", randomVector(upper,right), NYAN_SIZE);
+    public NyanCat(int upper, int right) {
+        super("images/original.gif", upper, right, NYAN_SIZE);
         this.upper = upper;
         this.right = right;
     }
 
     @Override
-    public void think(int delta)
-    {
-        x += 0.1f * delta;
-        y += 0.1f * delta;
+    public void think(int delta) 
+    {   
+        if (catGradient) 
+        {
+            if (y < 0) {
+                y = 0;
+                catGradient = false;
+                System.out.println("1");
+            }
+            else if ((y -= 0.1f * delta) > 0) {
+                y -= 0.1f * delta;
+                System.out.println("2");
+            }
+            else if ((y -= 0.1f * delta) == 0) {
+                y += 0.1f * delta;
+                catGradient = false;
+                System.out.println("3");
+            }
             
-        super.setPos((int)x, (int)(400* Math.sin(x / 1000)));
-    }
-    
-    public int generateX(){
-                return 200; //SPAWN AREA
+            if ((x += 0.1f * delta) > 1024) 
+            {
+                x = 0 + (0.1f * delta);
+            }
+            if ((x += 0.1f * delta) < 1024) {
+                x += 0.1f * delta;
+            }
         }
-    
+        if (!catGradient) {
+            if (y  > 0) {
+                y += 1 + 0.1f * delta;
+                System.out.println("4");
+            }
+            if ((y -= 0.1f * delta) == 720) {      
+                y -= 0.1f * delta;
+                catGradient = true;
+                System.out.println("5");
+            }
+            if (y < 0) {      
+                y = 1;
+                System.out.println("7");
+            }
+            if (y > 720) {      
+                y = 720;
+                catGradient = true;
+                System.out.println("6");
+            }
+            if ((x += 0.1f * delta) > 1024) 
+            {
+                x = 0 + (0.1f * delta);
+            }
+            if ((x += 0.1f * delta) < 1024) {
+                x += 0.1f * delta;
+            }
+        }
+        System.out.println(catGradient);
+        super.setPos((int)x, (int) y);
+    }
+
+    @Override
     public void reset() {
-        x = (int) (Math.random() * right);
-        y = (int) (Math.random() * upper);
-        super.setPos(randomVector(this.upper,this.right));
+        x = 0;
+        y = 500;
+        rndShift = (float)Math.random();
+        super.reset();
     }
-    
-    public static Vector2f randomVector(int upper, int right){
-        int coordx = (int) (Math.random() * right);
-        int coordy = (int) (Math.random() * upper);
-        return new Vector2f(coordx,coordy);
-    }
-    
-    public void Move(int delta){
-                yd += 0.1f * delta;
-                if(this.y+yd > 500){
-                        this.x = generateX();
-                        this.y = 0;
-                }
-                else{
-                        this.y += yd;
-                        yd = 0;
-                }
-        }
-        
+
 }
-    

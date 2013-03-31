@@ -33,6 +33,7 @@ public class GameState extends BasicGameState {
     Image cursor = null;
     float scale = 1;
     Music gameMusic = null;
+    int time;
         
     private int stateId = -1;
     private int score = 0;
@@ -63,7 +64,7 @@ public class GameState extends BasicGameState {
         gc.setMouseCursor(cursor, 16, 16);
 
         //Start music on a loop
-        gameMusic.loop();
+        //gameMusic.loop();
     }
 
     @Override
@@ -76,14 +77,16 @@ public class GameState extends BasicGameState {
             cat.render(g);
 
             if (mousePressed && catHit) {
-                g.drawString("Cat hit!", 200, 200);
+          
                 if (pointScored == false) {
                     score += 20;
+                    
                     cat.reset();
                 }
             }
                
             g.drawString("Score: " + Integer.toString(score), 100, 600);
+            g.drawString("Score: " + Integer.toString(60 - (time/1000)), 100, 620);
 
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
@@ -92,11 +95,13 @@ public class GameState extends BasicGameState {
     }
 
     @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         int posX = Mouse.getX();
         int posY = gc.getHeight() - Mouse.getY();
 
-        cat.think(2);
+        time += delta;
+        
+        cat.think(5);
                 
         Input input = gc.getInput();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
@@ -122,6 +127,10 @@ public class GameState extends BasicGameState {
         {
              System.out.println("Trying to unpause");
              gameMusic.loop();
+        }
+        
+        if ((time / 1000) > 30) {
+            sbg.enterState(2);
         }
     }
 }

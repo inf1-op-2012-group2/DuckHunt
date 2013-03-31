@@ -4,8 +4,10 @@
  */
 package duckhunt;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -30,17 +32,26 @@ public class ScoreState extends BasicGameState {
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
-        //init that thing
+        //code
     }
 
     @Override public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException
     {
-        //render stuff
+        grphcs.drawString("Score: " + "thisisnotacore", 100, 600);
+        grphcs.fillOval(75, 100, 100, 100);
+        grphcs.drawString("Play Again!", 80, 70);
     }
 
     @Override public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException
     {
-        //update stuff
+        Input input = gc.getInput();
+        int xpos = Mouse.getX();
+        int ypos = Mouse.getY();
+        if((xpos > 75 && xpos < 175)&&(ypos > 160 && ypos < 260)) {
+            if(input.isMouseButtonDown(0)) {
+                sbg.enterState(DuckHunt.STATE_MENU);
+            }
+        }
     }
    
 }

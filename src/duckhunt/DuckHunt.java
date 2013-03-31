@@ -13,6 +13,7 @@ public class DuckHunt extends StateBasedGame
     public static final int STATE_MENU = 0;
     public static final int STATE_GAME = 1;
     public static final int STATE_SCORE = 2;
+    public int score = 0;
     
     private DuckHunt()
     {
