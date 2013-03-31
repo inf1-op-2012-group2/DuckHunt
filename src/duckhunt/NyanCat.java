@@ -22,8 +22,8 @@ public final class NyanCat extends Entity {
     private int upper;
     private int right;
     private float yd;
-    private float x;
-    private float y = 500;
+    private float x = (float) Math.random() * 824;
+    private float y = (float) Math.random() * 600;
     private float rndShift;
     private boolean catGradient = true;
     private boolean xPositive = true;
@@ -143,10 +143,8 @@ public final class NyanCat extends Entity {
 
     @Override
     public void reset() {
-        rndShift = (float)Math.random();
-        System.out.println(rndShift);
-        x = 0 + rndShift;      
-        y = 0 + rndShift;
+        x = (int) Math.random() * 824;      
+        y = (int) Math.random() * 600;
         super.reset();
     }
 
