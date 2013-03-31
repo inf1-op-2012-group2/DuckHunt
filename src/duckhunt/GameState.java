@@ -34,6 +34,7 @@ public class GameState extends BasicGameState {
     float scale = 1;
     Music gameMusic = null;
     int time;
+    private int difficulty = 1;
         
     private int stateId = -1;
     private int score = 0;
@@ -45,6 +46,20 @@ public class GameState extends BasicGameState {
     @Override
     public int getID() {
         return this.stateId;
+    }
+    
+    public int setDifficulty(int difficulty) {
+        if (difficulty == 1) {
+           difficulty = 1; 
+        } 
+        else if (difficulty == 2) {
+            difficulty = 2;
+        }
+        else if (difficulty == 3) {
+            difficulty = 3;
+        }
+        
+        return difficulty;
     }
 
     @Override public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
@@ -85,8 +100,8 @@ public class GameState extends BasicGameState {
                 }
             }
                
-            g.drawString("Score: " + Integer.toString(score), 100, 600);
-            g.drawString("Score: " + Integer.toString(60 - (time/1000)), 100, 620);
+            g.drawString(Integer.toString(score), 150, 615);
+            g.drawString(Integer.toString(60 - (time/1000)), 150, 640);
 
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes 
@@ -101,7 +116,7 @@ public class GameState extends BasicGameState {
 
         time += delta;
         
-        cat.think(5);
+        cat.think(delta * difficulty);
                 
         Input input = gc.getInput();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
@@ -121,14 +136,13 @@ public class GameState extends BasicGameState {
         if ( input.isKeyPressed(Input.KEY_M) & gameMusic.paused() == false )
         {
              gameMusic.pause();
-             System.out.println("Music is paused");
         }
         if ( input.isKeyPressed(Input.KEY_N) & gameMusic.paused() == true )
         {
-             System.out.println("Trying to unpause");
              gameMusic.loop();
         }
         
+        //Timer
         if ((time / 1000) > 30) {
             sbg.enterState(2);
         }
