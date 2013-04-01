@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package duckhunt;
 
 import java.util.logging.Level;
@@ -11,10 +7,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-/**
- *
- * @author rikki
- */
 abstract public class Entity {
 
     public Image entityImage = null;
@@ -23,7 +15,6 @@ abstract public class Entity {
     private Vector2f ran;
     private int upper;
     private int right;
-    
 
     public abstract void think(int delta);
 
@@ -79,6 +70,6 @@ abstract public class Entity {
     }
 
     public void reset() {
-        setPos(randomVector(this.upper, this.right, this.entityImage.getWidth(),this.entityImage.getHeight()));
+        setPos(randomVector(this.upper, this.right, this.entityImage.getWidth(), this.entityImage.getHeight()));
     }
 }
