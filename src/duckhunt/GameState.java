@@ -6,10 +6,8 @@ package duckhunt;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.OpenGLException;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
@@ -138,7 +136,7 @@ public class GameState extends BasicGameState {
         }
         
         //Timer
-        if ((time / 1000) > 60) {
+        if ((time / 1000) > 30) {
             DuckHunt.setScore(score);
             sbg.enterState(2);
         }

@@ -4,11 +4,7 @@
  */
 package duckhunt;
 
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -150,9 +146,7 @@ public final class NyanCat extends Entity {
     public void reset() { 
         super.reset();
         x = (int) (Math.random() * 824);  
-        System.out.println(x);
         y = (int) (Math.random() * 600);
-        System.out.println(y);
     }
 
 }

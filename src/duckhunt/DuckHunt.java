@@ -21,7 +21,8 @@ public class DuckHunt extends StateBasedGame
     }
     
     private static DuckHunt INSTANCE = new DuckHunt();
-    final public static DuckHunt getInstance()
+    
+    public static DuckHunt getInstance()
     {
         return INSTANCE;
     }
