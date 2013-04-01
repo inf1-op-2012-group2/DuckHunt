@@ -76,7 +76,7 @@ public class GameState extends BasicGameState {
             }
 
             g.drawString(Integer.toString(score), 150, 615);
-            g.drawString(Integer.toString(60 - (time / 1000)), 150, 640);
+            g.drawString(Integer.toString(30 - (time / 1000)), 150, 640);
 
         } catch (OpenGLException ex) {
             // just ignore it - prevents random crashes
