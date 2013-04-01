@@ -27,15 +27,18 @@ public class GameState extends BasicGameState {
     private boolean mousePressed = false;
     private boolean catHit = false;
     private boolean pointScored = false;
+    private boolean playMusic = true;
     private Image land;
     private Image scoreImg;
+    
     NyanCat cat = null;
+    
     Image cursor = null;
-    float scale = 1;
+    
     Music gameMusic = null;
-    int time;
-    private int difficulty = 1;
-        
+    
+    private int time;
+    private int difficulty = 3;    
     private int stateId = -1;
     private int score = 0;
 
@@ -66,6 +69,7 @@ public class GameState extends BasicGameState {
     {
         //Initialise Music
         gameMusic = new Music("music/patty.wav");
+        gameMusic.loop();
         
         pointScored = false;
 
@@ -77,9 +81,7 @@ public class GameState extends BasicGameState {
         cursor = new Image("images/cursor.png"); /*Uncompressed PNG 2^n by 2^n dimensions Required */
         //Set the mouse cursor to the cursor image variable
         gc.setMouseCursor(cursor, 16, 16);
-
-        //Start music on a loop
-        //gameMusic.loop();
+        
     }
 
     @Override
@@ -143,7 +145,8 @@ public class GameState extends BasicGameState {
         }
         
         //Timer
-        if ((time / 1000) > 30) {
+        if ((time / 1000) > 5) {
+            DuckHunt.setScore(score);
             sbg.enterState(2);
         }
     }
