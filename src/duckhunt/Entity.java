@@ -20,6 +20,7 @@ abstract public class Entity {
     public Image entityImage = null;
     private Vector2f pos;
     private Vector2f size;
+    private Vector2f ran;
     private int upper;
     private int right;
     

@@ -149,8 +149,10 @@ public final class NyanCat extends Entity {
     @Override
     public void reset() { 
         super.reset();
-        x = (int) Math.random() * 824;      
-        y = (int) Math.random() * 600;
+        x = (int) (Math.random() * 824);  
+        System.out.println(x);
+        y = (int) (Math.random() * 600);
+        System.out.println(y);
     }
 
 }

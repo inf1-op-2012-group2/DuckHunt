@@ -124,13 +124,6 @@ public class GameState extends BasicGameState {
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             mousePressed = true;
             catHit = cat.contains(new Vector2f(posX, posY));
-            if (catHit) {
-                System.out.println("Cat hit");
-            } else {
-                System.out.println(String.format("Your hit: %d,%d", posX, posY));
-                System.out.println(String.format("Cat: %f,%f", cat.getPos().x, cat.getPos().y));
-
-            }
         } else {
             mousePressed = false;
         } 
@@ -145,7 +138,7 @@ public class GameState extends BasicGameState {
         }
         
         //Timer
-        if ((time / 1000) > 5) {
+        if ((time / 1000) > 60) {
             DuckHunt.setScore(score);
             sbg.enterState(2);
         }
